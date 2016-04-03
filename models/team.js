@@ -1,7 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    City = require('./city'),
-    Sport = require('./sport');
+    City = require('./city');
 
 var PlayerSchema = new Schema ({
   name: {
@@ -24,8 +23,8 @@ var TeamSchema = new Schema ({
     required: true
   },
   sport: {
-    type: Schema.Types.ObjectId,
-    ref: 'Sport'
+    type: String,
+    required: true
   },
   players: [PlayerSchema]
 });

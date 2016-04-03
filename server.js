@@ -75,16 +75,15 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/cities", description: "View all cities"},
       {method: "POST", path: "/api/cities", description: "Create a new city"},
       {method: "GET", path: "/api/cities/:id", description: "Find a city by its ID"},
-      {method: "GET", path: "/api/sports", description: "View all sports"},
-      {method: "POST", path: "/api/sports", description: "Create a new sport"},
-      {method: "GET", path: "/api/sports/:id", description: "Find a sport by its ID"}
     ]
   });
 });
 
+// get
 app.get('/api/profile', function (req, res) {
-  res.json({ profile: profile});
+  res.json({ profile: profile });
 });
+
 
 /**********
  * SERVER *
