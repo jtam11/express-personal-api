@@ -1,14 +1,20 @@
 console.log("Sanity Check: JS is working!");
 var template;
 var $teamsList;
+var $profileInfo;
+var profiles = [];
 var allTeams = [];
 
 $(document).ready(function(){
 
   $teamsList = $('#teamTarget');
+  $profileInfo = $('#profileInfo');
 
-  var source = $('#teams-template').html();
-  template = Handlebars.compile(source);
+  var profileSource = $('#profile-template').html();
+  profileTemplate = Handlebars.compile(profileSource);
+
+  var teamSource = $('#teams-template').html();
+  teamTemplate = Handlebars.compile(teamSource);
 
   $.ajax({
     method: 'GET',
@@ -16,6 +22,14 @@ $(document).ready(function(){
     success: onSuccess,
     error: onError
   });
+
+  $.ajax({
+    method: 'GET',
+    url: '/api/profile',
+    success: profileSuccess,
+    error: profileError
+  });
+
 
   $('#newTeamForm').on('submit', function(e) {
     e.preventDefault();
@@ -63,8 +77,14 @@ $(document).ready(function(){
 });
 function render () {
   $teamsList.empty();
-  var teamsHtml = template({ teams: allTeams });
+  var teamsHtml = teamTemplate({ teams: allTeams });
   $teamsList.append(teamsHtml);
+}
+
+function renderProfile (){
+  $profileInfo.empty();
+  var profileHtml = profileTemplate({ profile: profiles });
+  $profileInfo.append(profileHtml);
 }
 
 function onSuccess(json) {
@@ -76,7 +96,14 @@ function onError(e) {
   console.log('uh oh');
   $('#teamTarget').text('Failed to load teams, is the server working?');
 }
-
+function profileSuccess(json) {
+  profiles = json;
+  renderProfile();
+}
+function profileError(e) {
+  console.log('uh oh');
+  $('#profileInfo').text('Failed to load profile, is the server working?');
+}
 function newTeamSuccess(json) {
   $('#newTeamForm input').val('');
   allTeams.push(json);
