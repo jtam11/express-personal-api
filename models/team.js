@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    City = require('./city');
+    Schema = mongoose.Schema;
 
 var PlayerSchema = new Schema ({
   name: {
@@ -15,10 +14,14 @@ var PlayerSchema = new Schema ({
 
 var TeamSchema = new Schema ({
   city: {
-    type: Schema.Types.ObjectId,
-    ref: 'City'
+    type: String,
+    required: true
   },
   name: {
+    type: String,
+    required: true
+  },
+  logo: {
     type: String,
     required: true
   },

@@ -17,15 +17,93 @@
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
   </head>
+
+
   <body>
-    <div class="container">
-      <h1 class="text-center" id=
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
+    <<div class="container">
+    <h1 class="text-center">Sports Teams</h1>
+    <div class="row">
+      <div class="col-md-12">
+          <div id=apiDoc><a href="/api">Read My API Documentation</a></div>
+          <br>
+          <!-- Form to create new team -->
+        <form class="form-inline" id="newTeamForm">
+          <div class="form-group">
+            <label for="title">City</label>
+            <input type="text" class="form-control" name="city" placeholder="City">
+          </div>
+          <div class="form-group">
+            <label for="title">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Team Name">
+          </div>
+          <div class="form-group">
+            <label for="title">Logo</label>
+            <input type="text" class="form-control" name="logo" placeholder="IMG URL">
+          </div>
+          <div class="form-group">
+            <label for="title">Sport</label>
+            <input type="text" class="form-control" name="sport" placeholder="MLB, NFL, NBA ...">
+          </div>
+          <button type="submit" class="btn btn-default">Add Team</button>
+        </form>
+        <div id='teamTarget'>
+          <!-- handlebars template -->
+          <script id="teams-template" type="text/x-handlebars-template">
+            {{#each teams}}
+            <hr>
+            <div id="teaminfo">
+              <img src="{{logo}}">
+              {{city}}
+              {{name}}
+              <strong>{{sport}}</strong>
+            </div>
+            <!-- Update Form -->
+            <div class="collapse" id="update-{{_id}}">
+              <br>
+              <form class="form-inline update-team" id="{{_id}}">
+                <div class="form-group">
+                  <input type="text" name="city" class="form-control" placeholder="City">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="logo" class="form-control" placeholder="IMG URL">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="sport" placeholder="MLB, NFL, NBA ...">
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="updateBtn btn btn-block btn-default" value="Update">
+                </div>
+              </form>
+            </div>
+            <br>
+              <br>
+              <p><b>Players:</b><br>
+              {{#each players}}
+                {{name}},
+                {{position}}<br>
+              {{/each}}
+              <button type="button" name="delete" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button>
+              <button type="button" name="edit" class="btn btn-default pull-right" data-toggle="collapse" data-target="#update-{{_id}}" data-id={{_id}}>Edit</button>
+            </p>
+
+            <!-- Player Form -->
+            <form class="form-inline" id="addPlayerForm" data-id={{_id}}>
+              <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="Player Name">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="position" placeholder="Position">
+              </div>
+              <button type="submit" class="btn btn-default">Add Player</button>
+            </form>
+            {{/each}}
+          </script>
         </div>
       </div>
     </div>
+  </div>
   </body>
 </html>

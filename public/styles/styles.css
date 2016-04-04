@@ -1,10 +1,27 @@
 body {
-  color: #333;
+  color: #ffffff;
+  background-image: url('http://cdn.pcwallart.com/images/gradient-background-wallpaper-1.jpg');
+  background-position: center;
+  background-attachment: fixed;
   font-family: Helvetica, Arial, sans-serif;
-  background-color: skyblue; /* Sanity Check! */
 }
 
 h1 {
-  margin-top: 100px;
+  margin: 0 auto;
   text-align: center;
+}
+
+#apiDoc {
+  text-align: center;
+}
+
+#newTeamForm {
+  text-align: center;
+}
+#teaminfo{
+  font-size: 25px;
+}
+#teaminfo img {
+  width: 80px;
+  height: auto;
 }
